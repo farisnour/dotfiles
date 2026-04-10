@@ -14,7 +14,7 @@ bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
 
 # -- Separate history for each terminal
-export HISTFILE="~/.bash_history"
+export HISTFILE="$HOME/.bash_history"
 export HISTSIZE=10000
 export HISTFILESIZE=20000
 shopt -s histappend
