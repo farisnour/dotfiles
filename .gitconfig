@@ -1,0 +1,12 @@
+[user]
+	name = Faris Nour
+	email = <email>
+[core]
+	pager = less -FX
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true
+[pager]
+	branch = false
+	diff = delta --color-only --syntax-theme=\"TwoDark\" --pager='less -FX'
