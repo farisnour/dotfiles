@@ -16,8 +16,8 @@
 
     if (A_PriorKey = "CapsLock") {
         if (A_TickCount - CapsDownTime < 250) {
-	    Send "{Esc}"
-	}
+            Send "{Esc}"
+        }
     }
 }
 
