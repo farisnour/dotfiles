@@ -7,6 +7,7 @@
 LAlt & Tab:: AltTab
 Shift & Tab:: ShiftAltTab
 
+
 ; Rule 2: Cursor navigation for text editing
 
 ; -- Make Alt-arrow similar to Mac ⌘-arrows
