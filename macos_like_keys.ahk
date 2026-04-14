@@ -1,21 +1,15 @@
 #Requires AutoHotkey v2.0+
-#SingleInstance Force
 
 ; macOS-style key remapping for Windows 11
 
 ; Rule 1: Alt+Tab passthrough
-; Fix this later: Alt Tab Tab doesn't work
-LAlt & Tab:: {
-    if GetKeyState("Shift", "P")
-        Send "{Alt down}{Shift down}{Tab}{Shift up}{Alt up}"
-    else
-        Send "{Alt down}{Tab}{Alt up}"
-}
-
+; Fix this later: Alt+Shift+Tab exits as soon as shift is lifted
+LAlt & Tab:: AltTab
+Shift & Tab:: ShiftAltTab
 
 ; Rule 2: Cursor navigation for text editing
 
-; -- Line navigation (⌘ + arrows)
+; -- Make Alt-arrow similar to Mac ⌘-arrows
 LAlt & Left:: {
     if GetKeyState("Shift", "P")
         Send "{Shift down}{Home}{Shift up}"
@@ -30,7 +24,8 @@ LAlt & Right:: {
         Send "{End}"
 }
 
-; -- Word navigation (Option + arrows)
+; -- Make Win-arrow similar to Mac Option-arrows
+; Fix: Holding down Win then holding left arrow triggers Win-left Windows shortcut
 #Left::Send "{Ctrl down}{Left}{Ctrl up}"
 #+Left::Send "{Ctrl down}{Shift down}{Left}{Shift up}{Ctrl up}"
 #Right::Send "{Ctrl down}{Right}{Ctrl up}"
@@ -67,21 +62,56 @@ LAlt & r::MapAltToCtrl("r")
 LAlt & s::MapAltToCtrl("s")
 LAlt & t::MapAltToCtrl("t")
 LAlt & u::MapAltToCtrl("u")
-LAlt & v::MapAltToCtrl("v")
+; -- Handled specially for terminals
+; LAlt & v::MapAltToCtrl("v")
 LAlt & w::MapAltToCtrl("w")
 LAlt & x::MapAltToCtrl("x")
 LAlt & y::MapAltToCtrl("y")
 LAlt & z::MapAltToCtrl("z")
 
+LAlt & 9::MapAltToCtrl("9")
+LAlt & 0::MapAltToCtrl("0")
+LAlt & -::MapAltToCtrl("-")
+LAlt & =::MapAltToCtrl("=")
+LAlt & ,::MapAltToCtrl(",")
+
+; --- Handle special case Alt-V to paste in terminals
+IsTerminal() {
+    class := WinGetClass("A")
+    return class = "CASCADIA_HOSTING_WINDOW_CLASS"  ; Windows Terminal
+        || class = "mintty"                         ; Git Bash
+}
+
+LAlt & v:: {
+    if GetKeyState("Shift", "P")
+        Send "{Ctrl down}{Shift down}v{Shift up}{Ctrl up}"
+    else
+        if IsTerminal()
+            Send "{Shift down}{Insert}{Shift up}"
+        else
+            Send "{Ctrl down}v{Ctrl up}"
+}
+
+; --- Remap Alt + click to Ctrl + click
+; --- Remap Win + click to Alt + click
+!LButton::Send "^{Click}"
+!+LButton::Send "^+{Click}"
+#LButton::Send "!{Click}"
+#+LButton::Send "!+{Click}"
+
+
 ; Rule 4: Additional keybindings
 
-; --- ⌘ + backspace to delete word in terminal
-; --- Fix this to delete from cursor to start of line
+; --- ⌘ + backspace to delete until start of line
+; --- Fix this to work in terminal
 LAlt & Backspace:: {
     if GetKeyState("Shift", "P")
-        Send "{Alt down}{Shift down}{Backspace}{Shift up}{Alt up}"
+        Send "{Ctrl down}{Shift down}{Backspace}{Shift up}{Ctrl up}"
     else
-        Send "{Alt down}{Backspace}{Alt up}"
+        if IsTerminal()
+            Send "{Ctrl down}u{Ctrl up}"
+        else
+            Send "{Shift down}{Home}{Shift up}{Backspace}"
 }
 
 ; --- Option + backspace to delete word
@@ -89,7 +119,10 @@ LAlt & Backspace:: {
     if GetKeyState("Shift", "P")
         Send "{Ctrl down}{Shift down}{Backspace}{Shift up}{Ctrl up}"
     else
-        Send "{Ctrl down}{Backspace}{Ctrl up}"
+        if IsTerminal()
+            Send "{Alt down}{Backspace}{Alt up}"
+        else
+            Send "{Ctrl down}{Backspace}{Ctrl up}"
 }
 
 ; --- Tab switching within apps
@@ -98,7 +131,7 @@ LAlt & SC01A:: {
     if GetKeyState("Shift", "P")
         Send "^+{Tab}"
     else
-        Send "^["
+        Send "!{Left}"
 }
 
 ; ⌘ (Shift) + ]
@@ -106,5 +139,5 @@ LAlt & SC01B:: {
     if GetKeyState("Shift", "P")
         Send "^{Tab}"
     else
-        Send "^]"
+        Send "!{Right}"
 }
