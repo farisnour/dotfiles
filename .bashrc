@@ -1,13 +1,8 @@
 # Custom bash behaviour/settings
 
 # -- Add local dirs to PATH
-if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
-then
-	PATH="$HOME/.local/bin:$HOME/bin:$PATH"
-fi
-export PATH
-
 [[ ":$PATH:" != *":/usr/local/bin:"* ]] && export PATH="/usr/local/bin:$PATH"
+[[ ":$PATH:" != *":/opt/nvim-linux-x86_64/bin:"* ]] && export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
 # -- Cycle history with prefix
 bind '"\e[A": history-search-backward'
