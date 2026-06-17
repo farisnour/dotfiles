@@ -2,13 +2,7 @@
 
 ; macOS-style key remapping for Windows 11
 
-; Rule 1: Alt+Tab passthrough
-; Fix this later: Alt+Shift+Tab exits as soon as shift is lifted
-LAlt & Tab:: AltTab
-Shift & Tab:: ShiftAltTab
-
-
-; Rule 2: Cursor navigation for text editing
+; Rule 1: Cursor navigation for text editing
 
 ; -- Make Alt-arrow similar to Mac ⌘-arrows
 LAlt & Left:: {
@@ -33,7 +27,7 @@ LAlt & Right:: {
 #+Right::Send "{Ctrl down}{Shift down}{Right}{Shift up}{Ctrl up}"
 
 
-; Rule 3: Remap Alt to Ctrl for all key combinations
+; Rule 2: Remap Alt to Ctrl for all key combinations
 
 MapAltToCtrl(x) {
     if GetKeyState("Shift", "P")
@@ -101,7 +95,7 @@ LAlt & v:: {
 #+LButton::Send "!+{Click}"
 
 
-; Rule 4: Additional keybindings
+; Rule 3: Additional keybindings
 
 ; --- ⌘ + backspace to delete until start of line
 ; --- Fix this to work in terminal
