@@ -112,3 +112,6 @@ alias vi="vim"
 # Prevent history mixing between tabs
 unsetopt SHARE_HISTORY
 setopt INC_APPEND_HISTORY
+
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
