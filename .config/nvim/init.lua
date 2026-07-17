@@ -25,6 +25,7 @@ vim.api.nvim_set_keymap('n', '<Leader>w', ':w<CR>', { noremap = true, silent = t
 vim.api.nvim_set_keymap('n', '<Leader>q', ':q<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>x', ':wq<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>e', ':Ex<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>j', ':%!jq .<CR>', { noremap = true, silent = true })
 
 
 -- Jump to last cursor position when opening a file
