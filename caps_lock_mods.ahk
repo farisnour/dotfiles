@@ -29,6 +29,19 @@
             else if (targetKey == "2") {
                 HandleAppFocus("ahk_class CASCADIA_HOSTING_WINDOW_CLASS")
             }
+            else if (targetKey == "3") {
+                HandleAppFocus("ahk_exe Devin.exe")
+            }
+            else if (targetKey == "4") {
+                HandleAppFocus("ahk_exe Obsidian.exe")
+            }
+            else if (targetKey == "5") {
+                HandleAppFocus("ahk_exe ms-teams.exe")
+            }
+            else if (targetKey == "6") {
+	        ; Microsoft Outlook
+                HandleAppFocus("ahk_exe olk.exe")
+            }
             ; HANDLE ALL OTHER SHORTCUTS: Force Ctrl down dynamically for letters/symbols
             else {
                 ctrlSent := true
