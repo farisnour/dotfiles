@@ -1,5 +1,15 @@
 # My Dotfiles
 
+## Initial Setup for tmux
+
+Install tpm tmux plugin manager
+
+```shell
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+If you add a plugin to `~/.tmux.conf` hit `prefix + I` to fetch and source the new plugin.
+
 ## Initial Setup For RHEL 9
 
 Download and install neovim: https://neovim.io/doc/install/
