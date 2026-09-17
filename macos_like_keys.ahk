@@ -69,6 +69,8 @@ LAlt & 0::MapAltToCtrl("0")
 LAlt & -::MapAltToCtrl("-")
 LAlt & =::MapAltToCtrl("=")
 LAlt & ,::MapAltToCtrl(",")
+LAlt & .::MapAltToCtrl(".")
+LAlt & /::MapAltToCtrl("/")
 
 ; --- Handle special case Alt-V to paste in terminals
 IsTerminal() {
