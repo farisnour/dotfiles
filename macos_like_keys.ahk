@@ -138,3 +138,8 @@ LAlt & SC01B:: {
     else
         Send "!{Right}"
 }
+
+; --- Arrange Windows with "Workspace" Shortcuts
+; Ctrl + Alt + 1 / 2
+^!1::Run "C:\Users\fnour\Desktop\Workspace Home.lnk"
+^!2::Run "C:\Users\fnour\Desktop\Workspace Work.lnk"
